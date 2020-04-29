@@ -23,16 +23,6 @@ jobs:
         dockerfile: cloud9/Dockerfile
         always_pull: true
         tags: latest
-
----
-
-name: Vulnerability Scan
-
-on:
-  schedule:
-    - cron: '20 16 * * *'
-
-jobs:
   scan:
     name: Daily Vulnerability Scan
     runs-on: ubuntu-18.04
