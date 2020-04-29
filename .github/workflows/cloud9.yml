@@ -1,6 +1,8 @@
 name: Cloud9
 on:
   push:
+    paths:
+    - 'cloud9/**'
     branches:
       - master
     tags:
