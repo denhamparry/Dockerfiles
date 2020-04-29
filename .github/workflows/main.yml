@@ -24,11 +24,13 @@ jobs:
         always_pull: true
         tags: latest
 
+    ---
+
 name: Vulnerability Scan
 
 on:
   schedule:
-    - cron: '11 16 * * *'
+    - cron: '13 16 * * *'
 
 jobs:
   scan:
