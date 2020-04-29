@@ -6,11 +6,13 @@ on:
     tags:
       - '*'
   pull_request:
+  schedule:
+    - cron: '0 9 * * *'
 jobs:
   build:
     name: build
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 10
     steps:
     - name: Checkout
       uses: actions/checkout@v2
