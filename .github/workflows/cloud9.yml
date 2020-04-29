@@ -3,6 +3,7 @@ on:
   push:
     paths:
     - 'cloud9/**'
+    - '!cloud9/README.md'
     branches:
       - master
     tags:
