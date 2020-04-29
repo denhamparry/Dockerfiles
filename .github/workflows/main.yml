@@ -23,7 +23,8 @@ jobs:
         dockerfile: cloud9/Dockerfile
         always_pull: true
         tags: latest
-    - name: Scan image for vulnerabilities
-      uses: docker://docker.io/aquasec/trivy:0.6.0
+    - name: Scan image
+      uses: homoluctus/gitrivy@v1.0.0
       with:
-        args: --cache-dir /var/lib/trivy --exit-code 1 --no-progress docker.pkg.github.com/denhamparry/cloud9:${{ github.sha }}
+        token: ${{ secrets.GITHUB_TOKEN }}
+        image: denhamparry/cloud9:latest
