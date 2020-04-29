@@ -24,7 +24,7 @@ jobs:
         always_pull: true
         tags: latest
 
-    ---
+---
 
 name: Vulnerability Scan
 
