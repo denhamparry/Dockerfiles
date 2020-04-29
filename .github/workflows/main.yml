@@ -23,11 +23,7 @@ jobs:
         dockerfile: cloud9/Dockerfile
         always_pull: true
         tags: latest
-  scan:
-    name: Image scan
-    runs-on: ubuntu-latest
-    steps:
     - name: Scan image for vulnerabilities
-      uses: docker://docker.io/aquasec/trivy:0.2.1
+      uses: docker://docker.io/aquasec/trivy:0.6.0
       with:
         args: --cache-dir /var/lib/trivy --exit-code 1 --no-progress docker.pkg.github.com/denhamparry/cloud9:${{ github.sha }}
