@@ -23,3 +23,22 @@ jobs:
         dockerfile: cloud9/Dockerfile
         always_pull: true
         tags: latest
+
+name: Vulnerability Scan
+
+on:
+  schedule:
+    - cron: '11 16 * * *'
+
+jobs:
+  scan:
+    name: Daily Vulnerability Scan
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Pull docker image
+        run: docker pull sample
+
+      - uses: homoluctus/gitrivy@v1.0.0
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          image: denhamparry/cloud9:latest
