@@ -25,7 +25,7 @@ $ docker build \
 ### Basic
 
 ```bash
-$ docker create \
+$ docker run -it -d \
   --name=cloud9 \
   -e PUID=1000 \
   -e PGID=1000 \
