@@ -1,0 +1,31 @@
+name: Cloud9
+on:
+  schedule:
+    - cron: '0 9 * * *'
+jobs:
+  build:
+    name: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: hadolint
+      uses: reviewdog/action-hadolint@v1
+      with:
+        github_token: ${{ secrets.github_token }}
+        reporter: github-pr-review # Default is github-pr-check
+    - name: build and push image
+      uses: docker/build-push-action@v1
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+        repository: denhamparry/cloud9
+        dockerfile: cloud9/Dockerfile
+        always_pull: true
+        tags: latest
+    - name: Scan image
+      uses: homoluctus/gitrivy@v1.0.0
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        image: denhamparry/cloud9:latest
