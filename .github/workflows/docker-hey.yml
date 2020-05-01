@@ -9,6 +9,9 @@ on:
     tags:
       - '*'
   pull_request:
+    paths:
+    - 'docker-hey/**'
+    - '!docker-hey/README.md'
   schedule:
     - cron: '5 9 * * *'
 jobs:
