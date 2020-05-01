@@ -1,13 +1,8 @@
 name: Cloud9
 on:
-  push:
-    paths:
-    - 'cloud9/**'
-    - '!cloud9/README.md'
-    branches:
-      - master
-    tags:
-      - '*'
+  pull_request:
+       paths:
+       - 'cloud9/**'
 jobs:
   build:
     name: build
@@ -16,11 +11,13 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v2
-    - name: hadolint
+    - name: Dockerfile Lint 
       uses: reviewdog/action-hadolint@v1
       with:
         github_token: ${{ secrets.github_token }}
-        reporter: github-pr-review # Default is github-pr-check
+        level: warning
+        reporter: github-pr-review
+        tool_name: "Cloud9 Dockerfile Lint"
     - name: build and push image
       uses: docker/build-push-action@v1
       with:

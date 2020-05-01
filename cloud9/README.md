@@ -20,9 +20,9 @@ $ docker build \
   -t denhamparry/cloud9:latest .
 ```
 
-## Run
+## Basics
 
-### Basic
+### Run
 
 ```bash
 $ docker run -it -d \
@@ -33,6 +33,13 @@ $ docker run -it -d \
   -p 8000:8000 \
   --restart unless-stopped \
   denhamparry/cloud9
+```
+
+### Delete
+
+```bash
+$ docker stop cloud9 &&\
+    docker rm cloud9
 ```
 
 ## References

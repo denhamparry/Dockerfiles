@@ -1,13 +1,7 @@
 name: Cloud9
 on:
-  push:
-    paths:
-    - 'cloud9/**'
-    - '!cloud9/README.md'
-    branches:
-      - master
-    tags:
-      - '*'
+  schedule:
+    - cron: '0 9 * * *'
 jobs:
   build:
     name: build
