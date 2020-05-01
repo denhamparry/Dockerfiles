@@ -1,0 +1,40 @@
+name: Cloud9
+on:
+  push:
+    paths:
+    - 'docker-hey/**'
+    - '!docker-hey/README.md'
+    branches:
+      - master
+    tags:
+      - '*'
+  pull_request:
+  schedule:
+    - cron: '5 9 * * *'
+jobs:
+  build:
+    name: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: hadolint
+      uses: reviewdog/action-hadolint@v1
+      with:
+        github_token: ${{ secrets.github_token }}
+        reporter: github-pr-review
+    - name: build and push image
+      uses: docker/build-push-action@v1
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+        repository: denhamparry/docker-hey
+        dockerfile: docker-hey/Dockerfile
+        always_pull: true
+        tags: latest
+    - name: Scan image
+      uses: homoluctus/gitrivy@v1.0.0
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        image: denhamparry/docker-hey:latest
